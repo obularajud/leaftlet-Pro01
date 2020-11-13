@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script type="text/javascript" src="http://192.168.43.179:8002/static/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['sankey','corechart']});
+    google.charts.setOnLoadCallback(run);
+    function run(){
+        recentorderchart();
+             }
+
+    function recentorderchart() {
+    var data = google.visualization.arrayToDataTable([
+    ['Year', 'Amount'],
+        ['Oct. 16, 2020, midnight',6400.00],
+        ['Oct. 16, 2020, midnight',10419.00],
+    ]);
+
+    var view = new google.visualization.DataView(data);
+
+    view.setColumns([0,
+            1,{
+            calc: function (dt, row){return dt.getValue(row, 1);},
+            type: "number",
+            role: "annotation"
+            }
+            ]);
+
+    var options = {
+
+        title: 'Order Log',
+
+        hAxis: {
+            title: "Date"
+            },
+        vAxis: {
+            title: 'Rs'
+            }
+        };
+
+    var chart = new google.visualization.LineChart(document.getElementById('donutchart'));
+    chart.draw(view, options);
+
+    }
+
+    </script>
+  </head>
+  <body>
+    <div id="donutchart" style="width: 900px; height: 520px;"></div>
+  </body>
+</html>
